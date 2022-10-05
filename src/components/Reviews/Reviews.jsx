@@ -11,7 +11,7 @@ export const Reviews = () => {
     useEffect(() => {
         axiosGetReviewsFilms(moviesId).then(({data}) => {setReviews(data.results)});
       }, [moviesId]) 
-    console.log('reviews', reviews)
+   
 
     return (
         <> 

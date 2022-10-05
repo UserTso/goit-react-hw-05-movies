@@ -12,7 +12,7 @@ export const Home = () => {
     axiosTrend().then(({data}) => {setFilms(data.results)});
   }, []) 
   
-  console.log('films from state', films);
+
     return (
       <Main>
          <Title>Trending today</Title>

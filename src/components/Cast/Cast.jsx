@@ -10,7 +10,7 @@ export const Cast = () => {
     useEffect(() => {
         axiosGetMovieActors(moviesId).then(({data}) => {setActors(data.cast.slice(0,5))});
       }, [moviesId]) 
-    console.log('actors', actors)
+  
 
     return (
         <>
