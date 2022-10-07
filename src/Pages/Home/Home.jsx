@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {axiosTrend, IMAGE_URL } from '../../components/Api';
+import {axiosTrend, IMAGE_URL } from '../../Api';
 import {Link, useLocation} from 'react-router-dom';
 import {Main, Title, List, Item, Image} from './Home.styled';
 

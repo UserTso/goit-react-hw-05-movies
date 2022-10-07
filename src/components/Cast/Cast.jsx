@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import {axiosGetMovieActors, IMAGE_URL} from '../../components/Api';
-import {List, Item} from './Cast.styled';
+import { useParams} from 'react-router-dom';
+import {axiosGetMovieActors, IMAGE_URL} from '../../Api';
+import {List, Item, Text} from './Cast.styled';
 
 export const Cast = () => {
     const {moviesId} = useParams();
@@ -14,7 +14,7 @@ export const Cast = () => {
 
     return (
         <>
-         {actors && <List>{actors.map((actor) => {
+         {actors?.length ? (<List>{actors.map((actor) => {
             return (
                 <Item key={actor.name}>
                 <img src={`${IMAGE_URL}${actor.profile_path}`} alt={actor.name} />
@@ -23,7 +23,7 @@ export const Cast = () => {
             </Item>
             )
          })}
-        </List>}
+        </List>) : (<Text>We don't have any information for actors.</Text>)}
         </>
        
     )

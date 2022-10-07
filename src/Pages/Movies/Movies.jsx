@@ -1,6 +1,7 @@
+import { Suspense } from 'react';
 import { useSearchParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { axiosGetSearchFilms, IMAGE_URL } from '../../components/Api';
+import { axiosGetSearchFilms, IMAGE_URL } from '../../Api';
 import { Form, Input, Button, List, Item, Image } from './Movies.styled';
 
 export const Movies = () => {
@@ -13,41 +14,36 @@ export const Movies = () => {
 	// console.log('query', query)
 
 	useEffect(() => {
-		if (!query) {
-			return;
-		}
-		axiosGetSearchFilms(query)
-			.then(({ data }) => {
-				if (data.results.length) {
-					setFilms(data.results);
-				} else {
-					alert('Enter correct query');
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				// <h3>Sorry, this movie not found...</h3>;
-			});
+		query &&
+			axiosGetSearchFilms(query)
+				.then(({ data }) => {
+					if (data.results?.length) {
+						setFilms(data.results);
+					} else {
+						alert('Enter correct query');
+					}
+				})
+				.catch(error => {
+					console.log(error);
+				});
 	}, [query]);
 
 	const changeInput = event => {
 		const query = event.target.value;
-		// if (query === '') {
-		// 	return alert('Please, enter your request)');
-		// }
-		setName(query !== '' ? { query } : {});
+
+		setName({ query });
 	};
 
-	// const handleCheckSubmit = event => {
-	// 	console.log('name', name)
-	// 	if (name.query.trim() === '') {
-	// 		return alert('Please, enter your request)');
-	// 	}
-	// };
+	const handleCheckSubmit = event => {
+		const { query } = name;
+		if (!query) {
+			return alert('Please, enter your request)');
+		}
+	};
 
 	const handleFormSubmit = event => {
 		event.preventDefault();
-		// handleCheckSubmit();
+		handleCheckSubmit();
 		setSearchParams(name);
 		event.target.reset();
 	};
@@ -73,7 +69,11 @@ export const Movies = () => {
 						})}
 				</List>
 			</div>
-			<Outlet />
+			<Suspense fallback={<h2>Loading...</h2>}>
+				<Outlet />
+			</Suspense>
 		</>
 	);
 };
+
+

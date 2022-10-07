@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import {axiosGetReviewsFilms} from '../../components/Api';
+import { useParams} from 'react-router-dom';
+import {axiosGetReviewsFilms} from '../../Api';
 import {List, Item, Text} from './Reviews.styled';
 
 export const Reviews = () => {
@@ -19,7 +20,8 @@ export const Reviews = () => {
         {reviews?.length ? (<List> {reviews.map(({author, content, id}) => (
             <Item key={id}><div><b>Author:</b> {author}</div>
             <Text>{content}</Text></Item>
-        ))}</List>) : (<Text>We don't have any reviews for this movie.</Text>)}
+        ))}</List>) : (<Text>We don't have any reviews for this movie.</Text>)};
+       
         </>
        
     )

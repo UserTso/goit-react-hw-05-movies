@@ -1,6 +1,7 @@
+import {Suspense} from 'react';
 import { useState, useEffect } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
-import {axiosGetMomiesDetails, IMAGE_URL} from '../../components/Api';
+import {axiosGetMomiesDetails, IMAGE_URL} from '../../Api';
 import {Box, Image, Title, Text, Subtitle, Pretitle, Item, Smalltitle, List, Itemlink, Link} from './MoviesDetails.styled'
 
 
@@ -39,7 +40,9 @@ export const MoviesDetails = () => {
                 <Itemlink><Link to="cast" state={{from: location.state?.from}}>Cast</Link></Itemlink>
                 <Itemlink><Link to="reviews" state={{from: location.state?.from}}>Reviews</Link></Itemlink>
             </List>
-            <Outlet />
+            <Suspense fallback={<h2>Loading...</h2>}>
+				<Outlet />
+			</Suspense>
         </>
     )
 }

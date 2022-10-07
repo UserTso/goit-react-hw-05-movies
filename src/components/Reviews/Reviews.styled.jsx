@@ -10,5 +10,5 @@ export const Item = styled.li`
 `;
 
 export const Text = styled.p`
-    
+    font-size: 30px;
 `;
