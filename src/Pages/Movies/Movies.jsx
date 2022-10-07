@@ -69,7 +69,7 @@ export const Movies = () => {
 						})}
 				</List>
 			</div>
-			<Suspense fallback={<h2>Loading...</h2>}>
+			<Suspense fallback={<div>Loading...</div>}>
 				<Outlet />
 			</Suspense>
 		</>
